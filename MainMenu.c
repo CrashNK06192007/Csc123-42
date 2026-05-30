@@ -17,7 +17,7 @@ static void pressEnterToContinue(void)
 }
 static void run_game(int maxNoise, int noiseChance)
 {
-    printf("Game starting...");
+    printf("Game starting...\n");
     printf("Max noise: %d\n", maxNoise);
     printf("Noise Chance: %d%%\n", noiseChance);
 }
@@ -26,7 +26,7 @@ int main(void) {
     int difficulty;
     int maxNoise;
     int noiseChance;
-    char const *invalidDifficultyMsg = "Invalid choice\n";
+    char const *invalidChoiceMsg  = "Invalid choice\n";
     bool choosingDifficult = true;
     bool running = true;
     
@@ -40,7 +40,7 @@ int main(void) {
 
         if (scanf("%d", &choice) != 1) 
         {
-            printf("%s", invalidDifficultyMsg);
+            printf("%s", invalidChoiceMsg);
             discard_line();
             continue;
         }
@@ -48,6 +48,7 @@ int main(void) {
         
         switch (choice) {
             case 1:
+                choosingDifficult = true;
                 while(choosingDifficult)
                 {
                     printf("\nSelect a difficulty: \n");
@@ -60,7 +61,7 @@ int main(void) {
                     
                     if (scanf("%d", &difficulty) != 1) 
                     {
-                        printf("%s\n", invalidDifficultyMsg);
+                        printf("%s", invalidChoiceMsg);
                         discard_line();
                         continue;
                     }
@@ -94,6 +95,7 @@ int main(void) {
                             printf("Difficulty selected: Hard\n");
                             printf("Noise Limit: %d\n", maxNoise);
                             printf("Noise Chance: %d%%\n", noiseChance);
+                            run_game(maxNoise, noiseChance);
                             choosingDifficult = false;
                             pressEnterToContinue();
                             break;
@@ -103,11 +105,12 @@ int main(void) {
                             printf("Difficulty selected: Nightmare\n");
                             printf("Noise Limit: %d\n", maxNoise);
                             printf("Noise Chance: %d%%\n", noiseChance);
+                            run_game(maxNoise, noiseChance);
                             choosingDifficult = false;
                             pressEnterToContinue();
                             break;
                         default:
-                            printf("%s", invalidDifficultyMsg);
+                            printf("%s", invalidChoiceMsg);
                             break;  
                 }
             }
@@ -118,10 +121,10 @@ int main(void) {
                 printf("=========================\n");
 
         
-                printf("You have been kidnapped by Larry Benjamin, a wealthy serial murderer.\n");
-                printf("Search his house for three items: a phone, a key, and a code. \n");
+                printf("You have been kidnapped by Larry Benjamin, a wealthy serial Killer.\n");
+                printf("You must search his house for three items: a phone, a key, and a code. \n");
                 printf("Move carefully. Making too much noise will wake Larry.\n");
-                printf("Find all three items and escape before he catches you.\n");
+                printf("Find all three items to escape before he catches you.\n");
                 pressEnterToContinue();
                 break;
             case 3:
@@ -138,7 +141,7 @@ int main(void) {
                 running = false;
                 break;
             default:
-                printf("%s\n", invalidDifficultyMsg);
+                printf("%s", invalidChoiceMsg);
                 break;
         }
     }
